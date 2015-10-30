@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+    
+{% load i18n %}
+    
+{% block title %}W4E FAQ{% endblock %}
+
+{% block style %}
+    .post-description {
+        padding-left: 2em;
+    }
+    .code {
+        background: #ccc;
+        padding-left: .5em;
+        font-family: monospace;
+        white-space: pre;
+    }
+{% endblock style %}
+
+{% block header %}
+<h1>Watch For Events FAQ</h1>
+{% endblock header %}
+
+{% block content %}
+
+<div class="post">
+    <header class="post-header">
+    <h2 class="post-title">How to checkin from bash script</h2>
+    </header>
+    <div class="post-description">
+        <p>You can use <strong>curl</strong> or <strong>wget</strong> commands to checkin from a shell script. For example, using curl you would use:</p>
+        <div class="code">curl -L http://watch4.events/checkin/9YZNCBAR/</div>
+        <p><i>Note: currently you must use the -L option on curl so that the domain name redirect is performed</i></p>
+    </div>
+</div>
+
+<div class="post">
+    <header class="post-header">
+    <h2 class="post-title">How to checkin from python</h2>
+    </header>
+    <div class="post-description">
+        <p>There are several ways to checkin from python but this is one example:</p>
+        <div class="code">try:
+    # For Python 3.0 and later
+    from urllib.request import urlopen
+except ImportError:
+    # Fall back to Python 2's urllib2
+    from urllib2 import urlopen
+response = urlopen("http://watch4.events/checkin/9YZNCBAR/")
+response_text = response.read()</div>
+    </div>
+</div>
+
+<div class="post">
+    <header class="post-header">
+    <h2 class="post-title">How to checkin from a windows batch file</h2>
+    </header>
+    <div class="post-description">
+        <p>In windows you can checkin using powershell.  This command passes the url as a command line argument to powershell eliminating the need to create a separate powershell script.</p>
+        <p>One issue is that watch4.events has a URL re-direct to w4e.herokuapp.com which does not work with the WebClient.Download so you must use the w4e.herokuapp.com domain in the checkin URL as shown below.
+        <div class="code">
+powershell -Command "& { (new-object System.Net.WebClient).DownloadFile('http://w4e.herokuapp.com
+/checkin/CA309J0K','c:\windows\temp\dummy.txt') } "
+        </div>
+        Note there is no line break after the .com, one is shown above just for legibility.
+    </div>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,72 @@
+{% extends 'tc/test_nav.html' %}
+
+{% block title %}IOTS | Overview | {{ test }}
+{% endblock title %}
+
+{% load staticfiles %}
+
+{% block header %}
+    <style>
+        img {
+            width=250px;
+            border: 2px solid #666;
+            background: #fff;
+            padding: 2px;
+        }
+    </style>
+{% endblock header %}
+
+{% block content %}
+    <h1>Test {{ test }} Overview</h1>
+    <h3>Preface</h3>
+    <ul>
+    <li>Testing can be used to evaluate the protective performance of a packaged-product related
+        to vibrations, shocks and other stresses normally encountered during handling and
+        transportation in a parcel delivery system.</li>
+    <li>Test levels are based on general data and may not represent any specific distribution system
+    <li>The package and product are considered together and not separately.</li>
+    <li>Some conditions of transit, such as moisture, pressure or unusual handling may not be
+    covered.
+    </ul>
+    <p>Other ISTA Procedures may be appropriate for different conditions or to meet different objectives.
+    <p>Refer to Guidelines for Selecting and Using ISTA Procedures and Projects for additional information.
+
+    <p><b>NOTE:</b>
+    <p>Hazardous material packaging that passes this test procedure may not meet international, national or other regulatory requirements for the transport of hazardous materials. This test is not a substitute for United Nations and/or any other required test standards for the transport of hazardous materials, but should be used as an additional test in conjunction with them.
+    <h3>Scope</h3>
+    <p>Test Procedure 3A covers testing of individual packaged-products weighing 70 kilograms (150 pounds) or less when prepared for shipment via a parcel delivery carrier.
+    <h3>Product Damage Tolerance and Package Degradation Allowance</h3>
+    <p>The shipper shall determine the following prior to testing:
+    <ul>
+
+    <li>what constitutes damage to the product and
+    <li>what damage tolerance level is allowable, if any, and
+    <li>the correct methodology to determine product condition at the conclusion of the test and
+    <li>the acceptable package condition at the conclusion of the test.
+    </ul>
+    <p>For additional information on this determination process refer to Guidelines for Selecting and Using ISTA Procedures and Projects.
+    <h3>Samples</h3>
+    <p>Samples should be an untested actual package and product, but if one or both are not available, the substitutes shall be as
+identical as possible to actual items.
+    <p>One sample is required for this test procedure.
+To permit an adequate determination of representative performance of the packaged-product, ISTA:
+    <ul>
+    <li>Requires the procedure to be performed one time, but
+    <li>Recommends performing the procedure five or more times using new samples with each test
+    </ul>
+    <p>Refer to Guidelines for Selecting and Using ISTA Procedures and Projects for additional information on statistical sampling.
+    <p><b>NOTE:</b>
+    <p>In order to ensure testing in perfect condition, products and packages shipped to an ISTA Certified Laboratory for testing shall be:
+    <ul>
+    <li>Adequately over-packaged for shipment or
+    <li>Repackaged in new packaging at the laboratory.
+    </ul>
+    <p><b>NOTE:</b>
+    <p>It is important to thoroughly document the configuration, materials, and construction of the tested product and package. Significant variations in performance can sometimes be caused by seemingly insignificant differences. Photo documentation is strongly recommended to supplement detailed written descriptions.
+    <h3>Basis Weight</h3>
+    <p><b>Basis Weights of Corrugated Board</b>
+When the outer package is a corrugated box, it is strongly recommended that the basis weights of the papers/paperboards used to make the box be determined and documented. If the nominal basis weights change, even if the board is rated for the same performance, a retest is appropriate.
+Refer to Guidelines for Selecting and Using ISTA Procedures and Projects for additional information on documentation and basis weight determination.
+
+
+{% endblock content %}
