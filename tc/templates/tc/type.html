@@ -24,4 +24,32 @@
         {% csrf_token %}
         {{ form }}
         <input type="submit" name="submit" value="Save" />
+<br>
+<p>
+<img id="image" src='/static/standard.png'/>
+
+
+<script>
+function change_image(x) {
+    var image_src = '';
+    console.log('in change_image');
+    console.log(document.getElementById("id_package_type_0").checked);
+    if (document.getElementById("id_package_type_0").checked) {
+        image_src = '/static/standard.png';
+    }
+    if (document.getElementById("id_package_type_1").checked) {
+        image_src = '/static/small.png';
+    }
+    if (document.getElementById("id_package_type_2").checked) {
+        image_src = '/static/flat.png';
+    }
+    if (document.getElementById("id_package_type_3").checked) {
+        image_src = '/static/elongated.png';
+    }
+    console.log(image_src);
+    document.getElementById("image").src = image_src;
+}
+</script>
+
 {% endblock content %}
+

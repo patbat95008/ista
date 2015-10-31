@@ -15,6 +15,6 @@ class TestInfoForm(forms.ModelForm):
             'user': ('Your Name')
         }
         widgets = {
-            'package_type': forms.RadioSelect(),
+            'package_type': forms.RadioSelect(attrs={'onchange': "change_image(1)"}),
             'id': forms.TextInput(attrs={'hidden': True})
         }
