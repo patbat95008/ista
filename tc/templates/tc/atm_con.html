@@ -1,0 +1,49 @@
+{% extends 'tc/test_nav.html' %}
+
+{% block title %}IOTS | Overview | {{ test }}
+{% endblock title %}
+
+{% load staticfiles %}
+
+{% block header %}
+    <style>
+        img {
+            width=250px;
+            border: 2px solid #666;
+            background: #fff;
+            padding: 2px;
+        }
+    </style>
+{% endblock header %}
+
+{% block content %}
+
+<h1>Test {{ test }}: Atmospheric Conditioning</h1>
+<h2>Testing: {{ item }}</h2>
+
+<form>
+<p>Record the ambient laboratory temperature and humidity when testing starts
+<p><input name='start_temp'>
+<p>At the end of testing record temperature and humidity.
+<p><input name='start_temp'>
+
+<p>Go to TEST BLOCK 3 (Shock: First Sequence – Drop).
+
+<p>Select an anticipated condition from <a href="#">Before You Begin Atmospheric Conditioning</a>.
+
+<p>Check the conditioning apparatus to insure that the temperature and humidity are at the required levels.
+
+<p>Place the packaged-product in the conditioning apparatus.
+
+<p>At the completion of the required conditioning time remove the packaged-product from the conditioning apparatus.
+
+<p>Conditioning is now complete. When testing starts, record the ambient temperature 
+<p><input name='end_temp'>
+<p>and humidity.
+<p><input name='end_humid'>
+
+<p>Go to TEST BLOCK 3 (Shock: First Sequence – Drop) and perform the remaining test sequence as quickly as possible.
+
+<br>
+<a href='#'><img  src='/static/next.png' alt='next'/></a>
+{% endblock content %}

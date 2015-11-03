@@ -33,4 +33,19 @@ def select_type(request, id):
 
 def overview(request, id):
     ts = TestSession.objects.get(id=id)
-    return render(request, 'tc/overview.html', {'test': ts.test, 'id': id})
+    return render(request, 'tc/overview.html', {'test': ts.test, 
+                                                'item': ts.item_name,
+                                                'id': id})
+
+
+def atm_precon(request, id):
+    ts = TestSession.objects.get(id=id)
+    return render(request, 'tc/atm_precon.html', {'test': ts.test,
+                                                  'item': ts.item_name,
+                                                  'id': id})
+
+def atm_con(request, id):
+    ts = TestSession.objects.get(id=id)
+    return render(request, 'tc/atm_con.html', {'test': ts.test,
+                                               'item': ts.item_name,
+                                               'id': id})

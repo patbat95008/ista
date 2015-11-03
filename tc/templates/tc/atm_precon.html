@@ -1,0 +1,40 @@
+{% extends 'tc/test_nav.html' %}
+
+{% block title %}IOTS | Overview | {{ test }}
+{% endblock title %}
+
+{% load staticfiles %}
+
+{% block header %}
+    <style>
+        img {
+            width=250px;
+            border: 2px solid #666;
+            background: #fff;
+            padding: 2px;
+        }
+    </style>
+{% endblock header %}
+
+{% block content %}
+
+<h1>Test {{ test }}: Atmospheric Pre-Conditioning</h1>
+<h2>Testing: {{ item }}<h2>
+<h3>Required Preconditioning:</h3>
+<p>The packaged-product shall be preconditioned to laboratory ambient temperature and humidity for twelve (12) hours prior to testing.
+
+<h3>Optional Conditioning Recommended (to be performed after the required preconditioning):</h3>
+
+<p>To permit an adequate determination of packaged-product performance at anticipated atmospheric limits and where it is known that the atmospheric extremes are detrimental to the product, ISTA:
+<ul>
+<li><b>Requires</b> the highest temperature and humidity limits of the product be used, but
+<li><b>Recommends</b> that both the highest and lowest atmospheric conditions be used.
+</ul>
+
+<p>Condition packaged-products according to one or more of the conditions listed in the table below.
+<ul>
+<li>Remaining test requirements should be performed as soon as possible after removing the packaged-product from environmental conditioning apparatus.
+</ul>
+
+<a href='/tc/atm_con/{{ id }}'><img src='/static/next.png' alt='next'/></a>
+{% endblock content %}
