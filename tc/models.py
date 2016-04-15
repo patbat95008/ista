@@ -1,3 +1,4 @@
+# Copyright 2016 by Dane Collins
 from django.db import models
 
 

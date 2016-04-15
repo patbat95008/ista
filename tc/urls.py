@@ -1,3 +1,4 @@
+# Copyright 2016 by Dane Collins
 from django.conf.urls import patterns, url
 from tc import views
 
