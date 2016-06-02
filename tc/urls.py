@@ -9,4 +9,5 @@ urlpatterns = patterns('',
                        url(r'^overview/(?P<id>[\d]+)/$', views.overview),
                        url(r'^atm_precon/(?P<id>[\d]+)/$', views.atm_precon),
                        url(r'^atm_con/(?P<id>[\d]+)/$', views.atm_con),
+                       url(r'^step/(?P<num>[\d.]+)[/]*$', views.display_step),
                        )
