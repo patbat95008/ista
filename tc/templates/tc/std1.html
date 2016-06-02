@@ -1,0 +1,60 @@
+{% extends 'tc/test_nav.html' %}
+
+{% block title %}{{ name }} | {{ step.step }}
+{% endblock title %}
+
+{% load staticfiles %}
+
+{% block header %}
+    <style>
+        img {
+            width=250px;
+            background: #fff;
+            padding: 2px;
+            max-width: 40%;
+        }
+        .prev {
+            background-color: #ff0000;
+            color: white;
+            padding: 20px 20px 20px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .next {
+            background-color: #00ff00;
+            color: white;
+            padding: 20px 20px 20px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+        }
+    </style>
+{% endblock header %}
+
+{% block content %}
+
+<h1>Test {{ step.procedure }}: Step {{ step.step }}</h1>
+
+    <p>{{ step.desc }}</p>
+
+    <table>
+        <td>
+            <a href='#'><img  src='/static/photo.jpg' alt='take photo'/></a>
+        </td>
+        <td>
+            <a href='#'><img  src='/static/note.png' alt='take photo'/></a>
+        </td>
+    </table>
+
+    <table>
+        <td class="prev">
+            <a href='/tc/step/{{ prev }}'>Previous</a>
+        </td>
+        <td class="next">
+            <a href='/tc/step/{{ next }}'>Next Step</a>
+        </td>
+    </table>
+
+
+{% endblock content %}

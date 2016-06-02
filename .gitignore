@@ -22,6 +22,8 @@ bundler_stubs/
 .lock
 .py[cod]
 __pycache__/
+.idea/
 .pyc
 static/extra
 staticfiles
+.idea/workspace.xml
