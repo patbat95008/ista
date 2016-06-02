@@ -22,39 +22,45 @@
             display: inline-block;
         }
         .next {
-            background-color: #00ff00;
+            background-color: rgb(15,127,18);
             color: white;
             padding: 20px 20px 20px 20px;
             text-align: center;
             text-decoration: none;
             display: inline-block;
         }
+
     </style>
 {% endblock header %}
 
 {% block content %}
 
-<h1>Test {{ step.procedure }}: Step {{ step.step }}</h1>
-
+    <h2>Test {{ step.procedure }}: Step {{ step.step }}</h2>
+    <hr>
     <p>{{ step.desc }}</p>
+    <hr>
 
+    <h3>Continue</h3>
+    <table>
+        <td>
+            <a class="prev" href='/tc/step/{{ prev }}'>Previous</a>
+        </td>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+        <td>
+            <a class="next" href='/tc/step/{{ next }}'>Next Step</a>
+        </td>
+    </table>
+    <h3>Annotate Step With</h3>
     <table>
         <td>
             <a href='#'><img  src='/static/photo.jpg' alt='take photo'/></a>
         </td>
         <td>
-            <a href='#'><img  src='/static/note.png' alt='take photo'/></a>
+            <a href='#'><img  src='/static/note.jpg' alt='take photo'/></a>
         </td>
     </table>
 
-    <table>
-        <td class="prev">
-            <a href='/tc/step/{{ prev }}'>Previous</a>
-        </td>
-        <td class="next">
-            <a href='/tc/step/{{ next }}'>Next Step</a>
-        </td>
-    </table>
+
 
 
 {% endblock content %}

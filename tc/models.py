@@ -66,5 +66,5 @@ class TestSteps:
 
     def __init__(self):
         if not TestSteps.__steps__:
-            TestSteps.__steps__ = read_test_steps('/Users/dane/src/ista/tc/3a_data_table.txt')
+            TestSteps.__steps__ = read_test_steps('static/3a_data_table.txt')
         self.steps = TestSteps.__steps__
