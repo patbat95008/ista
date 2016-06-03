@@ -4,7 +4,7 @@ from django.http import Http404
 from django.views.generic import TemplateView
 
 
-from tc.models import TestSteps
+from tc.models import TestSteps, TestSession
 from tc.forms import TestInfoForm
 
 # Global App Name
@@ -12,31 +12,66 @@ APP_NAME = 'TestPlanner'
 steps = TestSteps().steps
 step_sequence = sorted(steps.keys())
 
+
+def set_current_test(request, test_id):
+    print('Setting current test to {}'.format(test_id))
+    request.session['current_test_id'] = test_id
+
+
+def get_current_test(request):
+    test_id = request.session.get('current_test_id')
+    if not test_id:
+        return None
+
+    try:
+        ts = TestSession.objects.get(id=test_id)
+        print('Found test with id={}'.format(test_id))
+        return ts
+    except TestSession.DoesNotExist:
+        return None
+
+
 def index(request):
     #log_view(request, 'home_page')
     return TemplateView.as_view(template_name="index.html")(request)
 
 
-def new_test(request, test_name):
-    ts = TestSession(test=test_name)
-    ts.save()
-
-    return select_type(request, ts.id)
-
-
-def select_type(request, id):
-    ts = TestSession.objects.get(id=id)
+def select_test(request):
+    which_test = '3A'
     if request.method == 'POST':
-        form = TestInfoForm(request.POST, instance=ts)
+        form = TestInfoForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect('/tc/overview/{}'.format(ts.id))
+            new_ts = form.save(commit=False)
+            new_ts.test = which_test
+            new_ts.state = 'in-progress'
+            new_ts.save()
+            set_current_test(request, new_ts.id)
+            return redirect('/tc/step/{}'.format(step_sequence[0]))
     else:
-        form = TestInfoForm(instance=ts)
-        return render(request, 'tc/type.html', {'form': form,
-                                                'test': ts.test,
-                                                'name': APP_NAME,
-                                                'id': id})
+        form = TestInfoForm()
+
+        # find all in-progress test sessions
+        ts = TestSession.objects.filter(state='in-progress').order_by('item_name')
+        test_list = []
+        for test in ts:
+            test_list.append(dict(id=test.id, desc='{} ({})'.format(test.item_name, test.user)))
+
+        return render(request, 'tc/select.html', {'form': form,
+                                                'test': which_test,
+                                                'test_list': test_list,
+                                                'name': APP_NAME})
+
+
+def set_test(request, test_id):
+    ts = get_object_or_404(TestSession, id=test_id)
+    set_current_test(request, test_id)
+    if ts.last_step:
+        last_step = ts.last_step
+    else:
+        last_step = step_sequence[0]
+        ts.last_step = last_step
+        ts.save()
+    return redirect('/tc/step/{}/'.format(last_step))
 
 
 def overview(request, id):
@@ -47,22 +82,9 @@ def overview(request, id):
                                                 'id': id})
 
 
-def atm_precon(request, id):
-    ts = TestSession.objects.get(id=id)
-    return render(request, 'tc/atm_precon.html', {'test': ts.test,
-                                                  'item': ts.item_name,
-                                                  'name': APP_NAME,
-                                                  'id': id})
-
-def atm_con(request, id):
-    ts = TestSession.objects.get(id=id)
-    return render(request, 'tc/atm_con.html', {'test': ts.test,
-                                               'item': ts.item_name,
-                                               'name': APP_NAME,
-                                               'id': id})
-
 def display_step(request, num):
     global steps, step_sequence, APP_NAME
+    ts = get_current_test(request)
 
     if num in steps:
         i = step_sequence.index(num)
@@ -70,8 +92,9 @@ def display_step(request, num):
         next = step_sequence[i+1]
         s = steps[num]
         page = "tc/{}.html".format(s.page)
-        args = dict(name=APP_NAME, page=page, prev=prev, next=next, step=s)
-        print(args)
+        args = dict(name=APP_NAME, page=page, prev=prev, next=next, step=s, current_test=ts)
+        ts.last_step = num
+        ts.save()
         return render(request, page, args)
     else:
         raise Http404("Poll does not exist")

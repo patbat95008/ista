@@ -15,9 +15,10 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('item_name', models.CharField(max_length=50)),
-                ('user', models.CharField(max_length=50)),
-                ('package_type', models.CharField(default=b'STANDARD', max_length=9, choices=[(b'STANDARD', b'Standard'), (b'SMALL', b'Small'), (b'FLAT', b'Flat'), (b'ELONGATED', b'Elongated')])),
+                ('user', models.CharField(default=b'anonymous', max_length=50)),
+                ('package_type', models.CharField(default=b'standard', max_length=9, choices=[(b'standard', b'standard'), (b'small', b'small'), (b'flat', b'flat'), (b'elongated', b'elongated')])),
                 ('test', models.CharField(max_length=10)),
+                ('state', models.CharField(default=b'in-progress', max_length=15)),
             ],
         ),
     ]

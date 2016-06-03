@@ -15,9 +15,11 @@ class TestSession(models.Model):
     )
 
     item_name = models.CharField(max_length=50)
-    user = models.CharField(max_length=50)
+    user = models.CharField(max_length=50, default='anonymous')
     package_type = models.CharField(max_length=9, choices=type_choices, default=standard)
     test = models.CharField(max_length=10)
+    state = models.CharField(max_length=15, default='')
+    last_step = models.CharField(max_length=10, default='')
 
 
 class TestStep:

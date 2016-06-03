@@ -17,13 +17,22 @@
 {% endblock header %}
 
 {% block content %}
-    <h1>Test {{ test }}</h1>
-    <h2>Select Your Package Type</h2>
+    <h1>Test ISTA 3A</h1>
+    {% if test_list %}
+        <h2>Select Test In Progress</h2>
+        <ul>
+            {% for test in test_list %}
+                <li><a href="/tc/set_test/{{ test.id }}/">{{ test.desc }}</a></li>
+            {% endfor %}
+        </ul>
+    {% endif %}
 
-    <form class="pure-form-stacked" action="/tc/type/{{ id }}/" method="POST">
+    <h2>Or Start A New Test</h2>
+
+    <form class="pure-form-stacked" action="/tc/select/" method="POST">
         {% csrf_token %}
         {{ form }}
-        <input type="submit" name="submit" value="Save" />
+        <input type="submit" name="submit" value="Create" />
 <br>
 <p>
 <img id="image" src='/static/standard.png'/>
@@ -50,6 +59,6 @@ function change_image(x) {
     document.getElementById("image").src = image_src;
 }
 </script>
-<p style="font-size: .75em; text-align: right;">type.html</p>
+<p style="font-size: .75em; text-align: right;">select.html</p>
 {% endblock content %}
 

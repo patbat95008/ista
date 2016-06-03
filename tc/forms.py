@@ -12,7 +12,7 @@ class TestInfoForm(forms.ModelForm):
         model = TestSession
         fields = ['item_name', 'user', 'package_type', 'id']
         labels = {
-            'item_name': ('Item Name'),
+            'item_name': ('Test Item Name'),
             'user': ('Your Name')
         }
         widgets = {
