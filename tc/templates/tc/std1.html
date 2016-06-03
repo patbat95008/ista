@@ -1,11 +1,12 @@
 {% extends 'tc/test_nav.html' %}
 
-{% block title %}{{ name }} | {{ step.step }}
+{% block title %}{{ step.procedure }} | {{ step.step }}
 {% endblock title %}
 
 {% load staticfiles %}
 
 {% block header %}
+    <h2>{{ step.procedure }} | {{ step.step }} | {{ current_test.item_name }}</h2>
     <style>
         img {
             width=250px;
@@ -35,8 +36,7 @@
 
 {% block content %}
 
-    <h2>{{ step.procedure }}: {{ step.step }} - {{ current_test.item_name }}</h2>
-    <hr>
+
     <p>{{ step.desc }}</p>
     <hr>
 
