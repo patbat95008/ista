@@ -8,11 +8,15 @@
 {% block header %}
     <h2>{{ step.procedure }} | {{ step.step }} | {{ current_test.item_name }}</h2>
     <style>
-        img {
-            width=250px;
+        .annotate {
             background: #fff;
             padding: 2px;
-            max-width: 40%;
+            max-width: 50%;
+        }
+        .moreinfo {
+            background: #fff;
+            padding: 2px;
+            max-width: 200px;
         }
         .prev {
             background-color: #ff0000;
@@ -38,6 +42,9 @@
 
 
     <p>{{ step.desc }}</p>
+    {% if step.more_info %}
+        <a href='/static/{{ step.more_info }}.html'><img class="moreinfo" src='/static/moreinfo.jpg' alt='more information'/></a>
+    {% endif %}
     <hr>
 
     <h3>Continue</h3>
@@ -53,10 +60,10 @@
     <h3>Annotate Step With</h3>
     <table>
         <td>
-            <a href='#'><img  src='/static/photo.jpg' alt='take photo'/></a>
+            <a href='#'><img class="annotate" src='/static/photo.jpg' alt='take photo'/></a>
         </td>
         <td>
-            <a href='#'><img  src='/static/note.jpg' alt='take photo'/></a>
+            <a href='#'><img class="annotate" src='/static/note.jpg' alt='take photo'/></a>
         </td>
     </table>
 
