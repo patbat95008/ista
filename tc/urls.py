@@ -8,4 +8,6 @@ urlpatterns = patterns('',
                        url(r'^overview/(?P<id>[\d]+)/$', views.overview),
                        url(r'^step/(?P<num>[\d.]+)[/]*$', views.display_step),
                        url(r'^set_test/(?P<test_id>[\d]+)/$', views.set_test),
+                       url(r'^get_image/$', views.get_image),
+                       url(r'^get_comment/$', views.get_comment),
                        )

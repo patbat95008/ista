@@ -1,0 +1,18 @@
+{% extends 'tc/test_nav.html' %}
+
+{% block title %}Comment Form
+{% endblock title %}
+
+{% load staticfiles %}
+
+{% block header %}
+    <h2>Comment Form</h2>
+{% endblock header %}
+
+{% block content %}
+
+    <form class="pure-form-stacked" action="/tc/get_comment/" method="POST">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Add" />
+{% endblock content %}

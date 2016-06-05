@@ -4,8 +4,8 @@ from django.http import Http404
 from django.views.generic import TemplateView
 
 
-from tc.models import TestSteps, TestSession
-from tc.forms import TestInfoForm
+from tc.models import TestSteps, TestSession, Media, Comment
+from tc.forms import TestInfoForm, MediaForm, CommentForm
 
 # Global App Name
 APP_NAME = 'TestPlanner'
@@ -32,7 +32,6 @@ def get_current_test(request):
 
 
 def index(request):
-    #log_view(request, 'home_page')
     return TemplateView.as_view(template_name="index.html")(request)
 
 
@@ -98,3 +97,34 @@ def display_step(request, num):
         return render(request, page, args)
     else:
         raise Http404("Poll does not exist")
+
+
+def get_image(request):
+    global steps, step_sequence, APP_NAME
+    ts = get_current_test(request)
+
+    if request.method == 'POST':
+        form = MediaForm(request.POST, request.FILES)
+        if form.is_valid():
+            new_doc = Media(upload=request.FILES['docfile'], session=ts, step=ts.last_step)
+            new_doc.save()
+            return redirect('/tc/step/{}'.format(ts.last_step))
+    else:
+        form = MediaForm()
+        return render(request, 'tc/get_image.html', {'form': form})
+
+
+def get_comment(request):
+    global steps, step_sequence, APP_NAME
+    ts = get_current_test(request)
+
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            data = form.cleaned_data
+            new_doc = Comment(comment=data['comment'], session=ts, step=ts.last_step)
+            new_doc.save()
+            return redirect('/tc/step/{}'.format(ts.last_step))
+    else:
+        form = CommentForm()
+        return render(request, 'tc/get_comment.html', {'form': form})
