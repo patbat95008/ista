@@ -26,5 +26,6 @@ urlpatterns = [
     url(r'^$', views.index),
     url(r'^select/$', TemplateView.as_view(template_name="select.html")),
     url(r'^tc/', include('tc.urls')),
+    url(r'^about/$', TemplateView.as_view(template_name="tc/overview.html")),
 
 ]
