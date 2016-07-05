@@ -1,0 +1,18 @@
+{% extends 'tc/test_nav.html' %}
+
+{% block title %}Upload Image
+{% endblock title %}
+
+{% load staticfiles %}
+
+{% block header %}
+    <h2>Upload Image</h2>
+{% endblock header %}
+
+{% block content %}
+
+    <form class="pure-form-stacked" action="/tc/get_image/" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Upload" />
+{% endblock content %}

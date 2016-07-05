@@ -1,17 +1,22 @@
 {% extends 'tc/test_nav.html' %}
 
-{% block title %}{{ name }} | {{ step.step }}
+{% block title %}{{ step.procedure }} | {{ step.step }}
 {% endblock title %}
 
 {% load staticfiles %}
 
 {% block header %}
+    <h2>{{ step.procedure }} | {{ step.step }} | {{ current_test.item_name }}</h2>
     <style>
-        img {
-            width=250px;
+       .annotate {
             background: #fff;
             padding: 2px;
-            max-width: 40%;
+            max-width: 50%;
+        }
+        .moreinfo {
+            background: #fff;
+            padding: 2px;
+            max-width: 200px;
         }
         .prev {
             background-color: #ff0000;
@@ -29,6 +34,7 @@
             text-decoration: none;
             display: inline-block;
         }
+
         .skip {
             background-color: #565656;
             color: white;
@@ -43,17 +49,18 @@
 
 {% block content %}
 
-<h1>Test {{ step.procedure }}: Step {{ step.step }}</h1>
-    <h2>Optional</h2>
+    <h2>Optional Step</h2>
 
     <p>{{ step.desc }}</p>
-
+    {% if step.more_info %}
+        <a href='/static/{{ step.more_info }}.html'><img class="moreinfo" src='/static/moreinfo.jpg' alt='more information'/></a>
+    {% endif %}
     <table>
         <td>
-            <a href='#'><img  src='/static/photo.jpg' alt='take photo'/></a>
+            <a href='/tc/get_image/'><img class="annotate" src='/static/photo.jpg' alt='take photo'/></a>
         </td>
         <td>
-            <a href='#'><img  src='/static/note.png' alt='take photo'/></a>
+            <a href='/tc/get_comment/'><img class="annotate" src='/static/note.png' alt='take photo'/></a>
         </td>
     </table>
 

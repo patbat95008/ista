@@ -1,4 +1,4 @@
-# copyright 2016 by dane collins
+# Copyright 2016 by Dane Collins
 from django.db import models
 
 
@@ -15,13 +15,37 @@ class TestSession(models.Model):
     )
 
     item_name = models.CharField(max_length=50)
-    user = models.CharField(max_length=50)
+    user = models.CharField(max_length=50, default='anonymous')
     package_type = models.CharField(max_length=9, choices=type_choices, default=standard)
     test = models.CharField(max_length=10)
+    state = models.CharField(max_length=15, default='')
+    last_step = models.CharField(max_length=10, default='')
+
+
+class Media(models.Model):
+    """
+    Stores images that were captured during a TestSession
+
+    Attributes:
+        :upload: the file name of the saved file
+        :session: a link to the test session the image belongs to
+        :time: a date/time stamp on when the image was captured
+        :step: which step during the test session the image was captured
+    """
+    upload = models.FileField(upload_to='ts_img/%Y/%m/%d/')
+    session = models.ForeignKey(TestSession)
+    time = models.DateTimeField(auto_now_add=True)
+    step = models.CharField(max_length=15, blank=True)
+
+
+class Comment(models.Model):
+    comment = models.CharField(max_length=1024, blank=True)
+    session = models.ForeignKey(TestSession)
+    time = models.DateTimeField(auto_now_add=True)
+    step = models.CharField(max_length=15, blank=True)
 
 
 class TestStep:
-
     @classmethod
     def from_csv(cls, line):
         self = cls()
@@ -54,7 +78,7 @@ class TestStep:
 def read_test_steps(fn):
     test_steps = {}
     with open(fn, 'U') as fp:
-        fp.readline() # skip header
+        fp.readline()  # skip header
         for line in fp.readlines():
             ts = TestStep.from_csv(line)
             test_steps[ts.step] = ts
@@ -68,3 +92,5 @@ class TestSteps:
         if not TestSteps.__steps__:
             TestSteps.__steps__ = read_test_steps('static/3a_data_table.txt')
         self.steps = TestSteps.__steps__
+
+

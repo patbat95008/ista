@@ -1,3 +1,4 @@
+# Copyright 2016 by Dane Collins
 """
 Django settings for ista project.
 
@@ -29,6 +30,8 @@ else:
     DEBUG = False
 
 ALLOWED_HOSTS = ['*']
+
+MEDIA_ROOT = 'uploads/'
 
 
 # Application definition
